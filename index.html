@@ -1,0 +1,89 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Lab</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, serif;
+        }
+
+        h1 {
+            color: #0B3954;
+        }
+
+        .boring {
+            color: aquamarine;
+        }
+
+        .green {
+            color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1 id="main-header">Moja aplikacja</h1>
+    <p>To będzie gra. A oto co muszę zrobić:</p>
+    <ol>
+        <li class="boring">Nauczyć się HTML</li>
+        <li class="boring">Nauczyć się CSS</li>
+        <li>Nauczyć się JS</li>
+        <li id="super-important">Zaimplementować</li>
+    </ol>
+</div>
+
+<p></p>
+
+<button type="button" onmouseover="removeBoringStuff()">Usuń nudne rzeczy</button>
+
+<p></p>
+
+<div id="form">
+    <input type="text" id="myTextField">
+    <input type="checkbox" id="myCheckbox">
+    <button type="button" onclick="readValues()">Odczytaj wartości</button>
+</div>
+
+<script>
+    // alert('Witamy witamy'); <- skomentowane dla szybszego debuga
+
+    // szukanie po identyfikatorze
+    const header = document.getElementById('main-header');
+    // alert(header.innerText); <- skomentowane dla szybszego debuga
+
+    // szukanie po selektorach (tak jak w CSS)
+    const nudy = document.querySelectorAll("#app .boring");
+    nudy.forEach(element => {
+        alert(`Nuda: ${element.innerText}`);
+        // element.classList.remove('boring'); <- skomentowane bo elementy boring usuniete pozniej
+    });
+
+    let div = document.createElement('div');
+    div.classList.add('green');
+    div.innerText = 'Zielony tekst (jeśli dodasz CSS)';
+    document.getElementById('app').append(div); // jest też prepend
+
+    let listItem = document.createElement('li');
+    listItem.innerText = 'Zagrać';
+    // dodaję na koniec listy
+    document.querySelector("#app ol li:last-child").after(listItem); // jest też before
+
+
+    function removeBoringStuff(){
+        document.querySelectorAll("#app .boring").forEach((e) => e.remove());
+        setInterval(() => console.log('Hej! Button był kliknięty, pamiętasz?'), 3000);
+    };
+
+    function readValues(){
+        let checkboxChecked = document.getElementById("myCheckbox").checked
+        let textFieldValue = document.getElementById("myTextField").value
+        if (checkboxChecked) {
+            alert(textFieldValue);
+        };
+    };
+
+</script>
+</body>
+</html>
